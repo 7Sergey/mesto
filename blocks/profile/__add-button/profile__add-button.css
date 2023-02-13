@@ -1,6 +1,18 @@
 .profile__add-button {
-  /* background: url("../../../images/Add\ Button.png") no-repeat scroll 0 0 transparent; */
+  background: url("../../../images/Vector.png") no-repeat center;
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
   width: 150px;
   height: 50px;
   margin-left: auto;
+  cursor: pointer;
+
+}
+
+@media screen and (max-width: 1000px) {
+  .profile__add-button {
+    margin: 36px auto 0;
+    width: 282px;
+
+  }
 }

@@ -3,5 +3,27 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 17px;
-  margin-top: 51px;
+  justify-items: center;
+  align-items: center;
+  max-width: 880px;
+  min-width: 320px;
+  margin: 51px auto 0;
+}
+
+@media screen and (max-width: 900px) {
+  .elements {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+    
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .elements {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+    
+  }
 }

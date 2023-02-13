@@ -1,3 +1,4 @@
 .elements__image {
-  width: 282px;
+  /* max-width: 282px; */
+  width: 100%;
 }

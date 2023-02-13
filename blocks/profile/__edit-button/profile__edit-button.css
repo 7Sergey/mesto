@@ -1,5 +1,8 @@
 .profile__edit-button {
-  position: absolute;
-  top: 15px;
-  right: 0;
+  background: url('../../../images/edit.png') no-repeat center;
+  border: 1px solid #FFFFFF;
+  width: 24px;
+  height: 24px;
+  margin-left: 18px;
+  cursor: pointer;
 }
