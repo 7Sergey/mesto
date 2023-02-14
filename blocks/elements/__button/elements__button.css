@@ -1,7 +1,8 @@
 .elements__button {
   background: url("../../../images/likeb.svg") no-repeat center;
   border: none;
-  width: 30px;
+  width: 22px;
+  height: 19px;
   cursor: pointer;
   transition: 0.4s ease;
 }

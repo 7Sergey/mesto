@@ -4,9 +4,3 @@
   justify-content: start;
   align-items:baseline;
 }
-
-@media screen and (max-width: 1000px) {
-  .profile__container {
-    
-  }
-}
