@@ -6,7 +6,7 @@
   height: 50px;
   margin-left: auto;
   cursor: pointer;
-
+  transition: 0.4s ease;
 }
 
 @media screen and (max-width: 1000px) {
@@ -15,4 +15,8 @@
     width: 282px;
 
   }
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
 }

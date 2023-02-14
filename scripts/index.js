@@ -18,7 +18,7 @@ function toggleClass() {//параметр event передается с addEven
 popup.addEventListener('click', function (event) {
   console.log('target :', event.target);//сюда попадает тот элемент, по которому кликнули
   console.log('currentTarget :', event.currentTarget);//тот элемент, на который мы повесили addEventListener. То есть класс .popup, который лежит в переменной popup
-  if(event.target === event.currentTarget) {
+  if (event.target === event.currentTarget) {
     toggleClass();
   }
 })
@@ -50,21 +50,21 @@ userJobInput.value = userJob;
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function handleFormSubmit (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
+function handleFormSubmit(evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  // Так мы можем определить свою логику отправки.
+  // О том, как это делать, расскажем позже.
 
-    // Получите значение полей jobInput и nameInput из свойства value
+  // Получите значение полей jobInput и nameInput из свойства value
 
-    // Выберите элементы, куда должны быть вставлены значения полей
-    // const userNameElement = document.querySelector('.profile__title')
-    userNameElement.textContent =  nameInput.value;
+  // Выберите элементы, куда должны быть вставлены значения полей
+  // const userNameElement = document.querySelector('.profile__title')
+  userNameElement.textContent = nameInput.value;
 
-    // const userJobElement = document.querySelector('.profile__subtitle')
-userJobElement.textContent = jobInput.value;
+  // const userJobElement = document.querySelector('.profile__subtitle')
+  userJobElement.textContent = jobInput.value;
 
-    // Вставьте новые значения с помощью textContent
+  // Вставьте новые значения с помощью textContent
 }
 
 // Прикрепляем обработчик к форме:
