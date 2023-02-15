@@ -5,9 +5,10 @@
   height: 19px;
   cursor: pointer;
   transition: 0.4s ease;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   margin-right: 1px;
+  box-sizing:border-box;
   background-color: #fff;
 }
 
@@ -16,7 +17,3 @@
   opacity: 0.6;
 }
 
-.elements__button:active {
-  background-image: url("../../../images/blacklike.svg");
-  opacity: 1;
-}
