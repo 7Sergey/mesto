@@ -26,15 +26,15 @@ popup.addEventListener('click', function (event) {
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__form')
 // Находим поля формы в DOM
-let nameInput = formElement.querySelector('.popup__name')
-let jobInput = formElement.querySelector('.popup__job')
+let nameInput = formElement.querySelector('.popup__input_type_name')
+let jobInput = formElement.querySelector('.popup__input_type_job')
 
 // находим элементы с именем и работой пользователя
 const userNameElement = document.querySelector('.profile__title')
 const userJobElement = document.querySelector('.profile__subtitle')
 // находим инпуты имени и работы в форме
-const userNameInput = document.querySelector('.popup__name')
-const userJobInput = document.querySelector('.popup__job')
+const userNameInput = document.querySelector('.popup__input_type_name')
+const userJobInput = document.querySelector('.popup__input_type_job')
 // записываем в эти поля значения с текущих значений юзера
 userNameInput.value = userNameElement.textContent;
 userJobInput.value = userJobElement.textContent;
