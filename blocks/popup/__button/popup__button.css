@@ -1,5 +1,6 @@
 .popup__button {
   background: #000000;
+  border: none;
   border-radius: 2px;
   color: white;
   cursor: pointer;
