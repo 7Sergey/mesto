@@ -29,7 +29,7 @@
         </button>
       </section>
       <section class="elements">
-        <div class="elements__item">
+        <!-- <div class="elements__item">
           <img class="elements__image" src="./images/kara.jpg" alt="Карачаевск">
           <button type="button" class="elements__trash-button"></button>
           <div class="elements__container">
@@ -77,7 +77,7 @@
             <h2 class="elements__title">Карачаево-Черкессия</h2>
             <button type="button" class="elements__button"></button>
           </div>
-        </div>
+        </div> -->
       </section>
     </main>
     <footer class="footer">
@@ -95,7 +95,7 @@
       </div>
     </section>
 
-    <section class="popup-add-card">
+    <section class="popup popup_new_card">
       <div class="popup__container">
         <button type="button" class="popup__button-close" aria-label="Закрыть попап"></button>
         <h2 class="popup__title">Новое место</h2>
@@ -108,16 +108,17 @@
     </section>
 
     <template class="template">
-      <div class="card">
-        <img class="card__image">
-        <button type="button" class="card__trash-button"></button>
-        <div class="card__container">
-          <h2 class="card__title"></h2>
-          <button type="button" class="card__button"></button>
+      <div class="elements__item card">
+        <img class="elements__image card__image">
+        <button type="button" class="elements__trash-button card__trash-button"></button>
+        <div class="elements__container card__container">
+          <h2 class="elements__title card__title"></h2>
+          <button type="button" class="elements__button card__button"></button>
         </div>
       </div>
     </template>
   </div>
+
 
 
 
