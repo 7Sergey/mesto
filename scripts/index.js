@@ -1,8 +1,25 @@
-// console.log('hello');
 const openPopup = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 const closePopup = document.querySelector('.popup__button-close');
 
+// Находим форму в DOM
+const formElement = document.querySelector('.popup__form')
+// находим элементы с именем и работой пользователя
+const userNameElement = document.querySelector('.profile__title')
+const userJobElement = document.querySelector('.profile__subtitle')
+// находим инпуты имени и работы в форме
+const userNameInput = document.querySelector('.popup__input_type_name')
+const userJobInput = document.querySelector('.popup__input_type_job')
+
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+function handleFormSubmit(evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  // Так мы можем определить свою логику отправки.
+  userNameElement.textContent = userNameInput.value;//запись в профиль значений из инпутов
+  userJobElement.textContent = userJobInput.value;
+  toggleClass();//закрытие попапа
+}
 
 function toggleClass() {//параметр event передается с addEventListener. 
   userNameInput.value = userNameElement.textContent;
@@ -11,29 +28,6 @@ function toggleClass() {//параметр event передается с addEven
   // Если элемент изначально отображается, то он будет скрыт, если элемент скрыт, то он будет отображен.
 }
 
-// Находим форму в DOM
-let formElement = document.querySelector('.popup__form')
-// Находим поля формы в DOM
-let nameInput = formElement.querySelector('.popup__input_type_name')
-let jobInput = formElement.querySelector('.popup__input_type_job')
-
-// находим элементы с именем и работой пользователя
-const userNameElement = document.querySelector('.profile__title')
-const userJobElement = document.querySelector('.profile__subtitle')
-// находим инпуты имени и работы в форме
-const userNameInput = document.querySelector('.popup__input_type_name')
-const userJobInput = document.querySelector('.popup__input_type_job')
-// записываем в эти поля значения с текущих значений юзера
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-function handleFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // Так мы можем определить свою логику отправки.
-  userNameElement.textContent = nameInput.value;
-  userJobElement.textContent = jobInput.value;
-  toggleClass();
-}
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
@@ -47,7 +41,3 @@ popup.addEventListener('click', function (event) {
     toggleClass();
   }
 })
-
-
-
-

@@ -7,4 +7,5 @@
   color: #000;
   max-height: 361px;
   box-sizing: border-box;
+  position: relative;
 }
