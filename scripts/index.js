@@ -1,43 +1,83 @@
-const openPopup = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
-const closePopup = document.querySelector('.popup__button-close');
+const popupProfile = document.querySelector('.popup_profile');
+const popupProfileOpen = document.querySelector('.profile__edit-button');
+const popupProfileClose = popupProfile.querySelector('.popup__button-close');
+
 
 // Находим форму в DOM
-const formElement = document.querySelector('.popup__form')
+const formProfile = popupProfile.querySelector('.popup__form')//форму в переменную для обработки сабмита
 // находим элементы с именем и работой пользователя
-const userNameElement = document.querySelector('.profile__title')
+const userNameElement = document.querySelector('.profile__title')//на странице
 const userJobElement = document.querySelector('.profile__subtitle')
-// находим инпуты имени и работы в форме
-const userNameInput = document.querySelector('.popup__input_type_name')
-const userJobInput = document.querySelector('.popup__input_type_job')
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-function handleFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // Так мы можем определить свою логику отправки.
+
+const userNameInput = popupProfile.querySelector('.popup__input_type_name')//поля в форме
+const userJobInput = popupProfile.querySelector('.popup__input_type_job')
+
+//функция переключения класса видимости для всех попапов
+const togglePopup = (popup) => {
+  popup.classList.toggle('popup_opened');
+}
+
+
+const handleFormSubmit = (evt) => {//отправка формы профиля evt -- параметр, передаваемый кликом
+  evt.preventDefault(); // Отмена дефолтной отправки формы с перезагрузкой страницы
   userNameElement.textContent = userNameInput.value;//запись в профиль значений из инпутов
   userJobElement.textContent = userJobInput.value;
-  toggleClass();//закрытие попапа
+  togglePopup(popupProfile);
 }
 
-function toggleClass() {//параметр event передается с addEventListener. 
-  userNameInput.value = userNameElement.textContent;
-  userJobInput.value = userJobElement.textContent;
-  popup.classList.toggle('popup_opened');// .toggle() позволяет отобразить или скрыть выбранные элементы. 
-  // Если элемент изначально отображается, то он будет скрыт, если элемент скрыт, то он будет отображен.
-}
-
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', handleFormSubmit);//слушатель сохранения изменений в форме
-openPopup.addEventListener('click', toggleClass)//пишем функцию без скобок, чтобы она сразу не вызвалась
-closePopup.addEventListener('click', toggleClass)//слушатель закрытия попапа
-
-//  ЗАКРЫТИЕ ПОПАПА ПРИ НАЖАТИИ НА ОБЛАСТЬ ВНЕ ПОПАПА
-popup.addEventListener('click', function (event) {
+popupProfile.addEventListener('click', (event) => {//  ЗАКРЫТИЕ ПОПАПА ПРИ НАЖАТИИ НА ОБЛАСТЬ ВНЕ ПОПАПА
   if (event.target === event.currentTarget) {
-    toggleClass();
+  togglePopup(popupProfile);
   }
 })
+popupProfileOpen.addEventListener('click', () => {//открытие попапа профиля
+  userNameInput.value = userNameElement.textContent;
+  userJobInput.value = userJobElement.textContent;
+  togglePopup(popupProfile);
+})
+popupProfileClose.addEventListener('click', () => {//закрытие попапа профиля
+  togglePopup(popupProfile)
+})
+
+formProfile.addEventListener('submit', handleFormSubmit);//слушатель сохранения изменений в форме профиля
+
+
+
+
+//ПРОЕКТНАЯ РАБОТА 5
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    image: 'https://picsum.photos/00?card1'
+  },
+  {
+    name: 'Челябинская область',
+    image: 'https://picsum.photos/00?card2'
+  },
+  {
+    name: 'Иваново',
+    image: 'https://picsum.photos/00?card3'
+  },
+  {
+    name: 'Камчатка',
+    image: 'https://picsum.photos/00?card4'
+  },
+  {
+    name: 'Холмогорский район',
+    image: 'https://picsum.photos/00?card5'
+  },
+  {
+    name: 'Байкал',
+    image: 'https://picsum.photos/00?card6'
+  }
+];
+
+// const elements = document.querySelector('.elements');
+
+// const createCard = (card) => {
+//   const cardTemplate = document.querySelector('.template').value.cloneNode(true);
+//   const cardTitle = card.querySelector('.card__title');
+// }
+
