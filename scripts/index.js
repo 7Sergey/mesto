@@ -10,24 +10,13 @@ const userNameInput = popupProfile.querySelector('.popup__input_type_name')//п�
 const userJobInput = popupProfile.querySelector('.popup__input_type_job')
 
 
-//ПОПАП ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ
-const popupNewCard = document.querySelector('.popup_new_card');
-const popupNewCardOpen = document.querySelector('.profile__add-button');
-const popupNewCardClose = popupNewCard.querySelector('.popup__button-close');
-
-const cardName = document.querySelector('.elements__title')//на странице
-const cardImage = document.querySelector('.elements__image')
-
-const formNewCard = popupNewCard.querySelector('.popup__form')//форму в переменную для обработки сабмита
-const formCardName = popupNewCard.querySelector('.popup__input_type_name')//поля в форме
-const formCardImage = popupNewCard.querySelector('.popup__input_type_image')
 
 //функция переключения класса видимости для всех попапов
-const togglePopup = (popup) => {
+function togglePopup(popup) {
   popup.classList.toggle('popup_opened');
 }
 
-const handleFormSubmit = (evt) => {//отправка формы профиля evt -- параметр, передаваемый кликом
+function handleFormSubmit(evt) {//отправка формы профиля evt -- параметр, передаваемый кликом
   evt.preventDefault(); // Отмена дефолтной отправки формы с перезагрузкой страницы
   userNameElement.textContent = userNameInput.value;//запись в профиль значений из инпутов
   userJobElement.textContent = userJobInput.value;
@@ -49,7 +38,7 @@ popupProfileClose.addEventListener('click', () => {//закрытие попап
 
 popupProfile.addEventListener('click', (event) => {//  ЗАКРЫТИЕ ПОПАПА ПРИ НАЖАТИИ НА ОБЛАСТЬ ВНЕ ПОПАПА
   if (event.target === event.currentTarget) {
-  togglePopup(popupProfile);
+    togglePopup(popupProfile);
   }
 })
 
@@ -87,7 +76,7 @@ const initialCards = [
 
 const elements = document.querySelector('.elements');
 
-const createCard = (card) => {
+function createCard(card) {//создание карточек из массива
   const newCard = document.querySelector('.template').content.cloneNode(true);
   const cardTitleTemplate = newCard.querySelector('.card__title');
   cardTitleTemplate.textContent = card.name
@@ -99,8 +88,7 @@ const createCard = (card) => {
   elements.append(newCard)
 }
 
-initialCards.forEach(createCard);
-
+initialCards.forEach(createCard);//перебор массива объектов с созданием карточек
 
 
 function handleDeleteButtonClick(event) {//удаление карточки
@@ -109,3 +97,46 @@ function handleDeleteButtonClick(event) {//удаление карточки
   card.remove()
 }
 
+
+//ПОПАП ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ
+const popupNewCard = document.querySelector('.popup_new_card');
+const popupNewCardOpen = document.querySelector('.profile__add-button');
+const popupNewCardClose = popupNewCard.querySelector('.popup__button-close');
+
+// const cardName = document.querySelector('.elements__title')//на странице
+// const cardImage = document.querySelector('.elements__image')
+
+// const formNewCard = popupNewCard.querySelector('.popup__form')//форму в переменную для обработки сабмита
+
+popupNewCardOpen.addEventListener('click', () => {//открытие попапа 
+  togglePopup(popupNewCard);
+})
+
+popupNewCardClose.addEventListener('click', () => {//закрытие попапа 
+  togglePopup(popupNewCard)
+})
+
+popupNewCard.addEventListener('click', (event) => {//  ЗАКРЫТИЕ ПОПАПА ПРИ НАЖАТИИ НА ОБЛАСТЬ ВНЕ ПОПАПА
+  if (event.target === event.currentTarget) {
+    togglePopup(popupNewCard);
+  }
+})
+
+
+const form = popupNewCard.querySelector('.popup__form')
+
+form.addEventListener('submit', submit);//отправка формы
+
+function submit(event) {
+  event.preventDefault()
+  const form = event.target
+  const name = form.querySelector('.popup__input_type_name').value
+  const image = form.querySelector('.popup__input_type_image').value
+
+  const card = {
+    name: name,
+    image: image
+  }
+  createCard(card)
+  togglePopup(popupNewCard)
+}
