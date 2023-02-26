@@ -76,20 +76,32 @@ const initialCards = [
 
 const elements = document.querySelector('.elements');
 
-function createCard(card) {//создание карточек из массива
+function createCard(card) {//создание карточек
   const newCard = document.querySelector('.template').content.cloneNode(true);
   const cardTitleTemplate = newCard.querySelector('.card__title');
   cardTitleTemplate.textContent = card.name
   const cardImageTemplate = newCard.querySelector('.card__image')
   cardImageTemplate.setAttribute('src', card.image)
   cardImageTemplate.setAttribute('alt', card.name)
-  const likeButton = newCard.querySelector('.card__trash-button')
-  likeButton.addEventListener('click', handleDeleteButtonClick)
-  elements.append(newCard)
+
+  cardImageTemplate.addEventListener('click', openImagePopup)//открытие увеличенного изображени;
+
+  const buttonDelete = newCard.querySelector('.card__trash-button')//удаление
+  buttonDelete.addEventListener('click', handleDeleteButtonClick)
+  const likeButton = newCard.querySelector('.card__button')//лайки
+  likeButton.addEventListener('click', function (event) {
+    event.target.classList.toggle('elements__button_active');
+  });
+
+  elements.prepend(newCard)//добавление карточки в начало
 }
 
 initialCards.forEach(createCard);//перебор массива объектов с созданием карточек
 
+function openImagePopup(event) {
+  const openPopup = document.querySelector('.popup-image')
+  openPopup.classList.toggle('popup-image_opened')
+}
 
 function handleDeleteButtonClick(event) {//удаление карточки
   const button = event.target;
@@ -97,9 +109,8 @@ function handleDeleteButtonClick(event) {//удаление карточки
   card.remove()
 }
 
-
 //ПОПАП ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ
-const popupNewCard = document.querySelector('.popup_new_card');
+const popupNewCard = document.querySelector('.popup_new-card');
 const popupNewCardOpen = document.querySelector('.profile__add-button');
 const popupNewCardClose = popupNewCard.querySelector('.popup__button-close');
 
@@ -133,10 +144,15 @@ function submit(event) {
   const name = form.querySelector('.popup__input_type_name').value
   const image = form.querySelector('.popup__input_type_image').value
 
-  const card = {
-    name: name,
-    image: image
-  }
-  createCard(card)
-  togglePopup(popupNewCard)
+  if (name && image) {
+    const card = {
+      name: name,
+      image: image
+    }
+    createCard(card)
+    togglePopup(popupNewCard)
+    form.querySelector('.popup__input_type_name').value = ''//обнуление инпутов
+    form.querySelector('.popup__input_type_image').value = ''
+  } else alert('Введите данные в поля')
 }
+
