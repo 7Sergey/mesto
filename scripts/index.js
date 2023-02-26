@@ -84,7 +84,9 @@ function createCard(card) {//создание карточек
   cardImageTemplate.setAttribute('src', card.image)
   cardImageTemplate.setAttribute('alt', card.name)
 
-  cardImageTemplate.addEventListener('click', openImagePopup)//открытие увеличенного изображени;
+
+
+  cardImageTemplate.addEventListener('click', openImagePopup);
 
   const buttonDelete = newCard.querySelector('.card__trash-button')//удаление
   buttonDelete.addEventListener('click', handleDeleteButtonClick)
@@ -99,8 +101,12 @@ function createCard(card) {//создание карточек
 initialCards.forEach(createCard);//перебор массива объектов с созданием карточек
 
 function openImagePopup(event) {
-  const openPopup = document.querySelector('.popup-image')
-  openPopup.classList.toggle('popup-image_opened')
+  const openPopup = document.querySelector('.popup-zoom')
+  openPopup.classList.toggle('popup-zoom_opened');
+
+  const zoomImage = openPopup.querySelector('.popup-zoom__image')
+  const image = event.target.getAttribute('src')
+  zoomImage.setAttribute("src", image)
 }
 
 function handleDeleteButtonClick(event) {//удаление карточки
