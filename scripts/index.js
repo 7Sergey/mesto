@@ -86,8 +86,7 @@ function createCard(card) {//создание карточек
 
 
 
-  cardImageTemplate.addEventListener('click', openImagePopup);
-
+  cardImageTemplate.addEventListener('click', openImagePopup);//открытие попапа зума
   const buttonDelete = newCard.querySelector('.card__trash-button')//удаление
   buttonDelete.addEventListener('click', handleDeleteButtonClick)
   const likeButton = newCard.querySelector('.card__button')//лайки
@@ -103,10 +102,12 @@ initialCards.forEach(createCard);//перебор массива объекто�
 function openImagePopup(event) {
   const openPopup = document.querySelector('.popup-zoom')
   openPopup.classList.toggle('popup-zoom_opened');
-
   const zoomImage = openPopup.querySelector('.popup-zoom__image')
   const image = event.target.getAttribute('src')
   zoomImage.setAttribute("src", image)
+  const title = openPopup.querySelector('.popup-zoom__title')
+  const zoomTitle = event.target.parentNode.querySelector('.card__title').textContent
+  title.textContent = zoomTitle
 }
 
 function handleDeleteButtonClick(event) {//удаление карточки
