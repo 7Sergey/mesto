@@ -1,10 +1,9 @@
 .popup-zoom__title {
   margin: 0;
-  color: #000;
+  color: #fff;
   background: inherit;
   font-family: "Inter", "Arial", sans-serif;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
 }
-
