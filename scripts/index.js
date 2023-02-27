@@ -44,7 +44,6 @@ popupProfile.addEventListener('click', (event) => {//  ЗАКРЫТИЕ ПОПА
 
 
 
-
 //ПРОЕКТНАЯ РАБОТА 5
 
 const initialCards = [
@@ -100,19 +99,28 @@ function createCard(card) {//создание карточек
 initialCards.forEach(createCard);//перебор массива объектов с созданием карточек
 
 function openImagePopup(event) {
-  const openPopup = document.querySelector('.popup-zoom')
-  openPopup.classList.toggle('popup-zoom_opened');
-  const zoomImage = openPopup.querySelector('.popup-zoom__image')
+  const popupZoom = document.querySelector('.popup-zoom')
+  popupZoom.classList.toggle('popup-zoom_opened');
+  const zoomImage = popupZoom.querySelector('.popup-zoom__image')//добавление аттрибута для картинки
   const image = event.target.getAttribute('src')
   zoomImage.setAttribute("src", image)
-  const title = openPopup.querySelector('.popup-zoom__title')
-  const zoomTitle = event.target.parentNode.querySelector('.card__title').textContent
+  const title = popupZoom.querySelector('.popup-zoom__title')
+  const zoomTitle = event.target.parentNode.querySelector('.card__title').textContent // обращаюсь через родителя таргетного элемента
   title.textContent = zoomTitle
+
 }
+
+const popupZoom = document.querySelector('.popup-zoom')
+const closeZoom = popupZoom.querySelector('.popup-zoom__button-close')
+
+closeZoom.addEventListener('click', () => {
+  popupZoom.classList.toggle('popup-zoom_opened');
+})
+console.log(popupZoom);
 
 function handleDeleteButtonClick(event) {//удаление карточки
   const button = event.target;
-  const card = button.closest('.card')//возможна проблема из-за того, что .card -- div, а не form
+  const card = button.closest('.card')
   card.remove()
 }
 
@@ -121,16 +129,11 @@ const popupNewCard = document.querySelector('.popup_new-card');
 const popupNewCardOpen = document.querySelector('.profile__add-button');
 const popupNewCardClose = popupNewCard.querySelector('.popup__button-close');
 
-// const cardName = document.querySelector('.elements__title')//на странице
-// const cardImage = document.querySelector('.elements__image')
-
-// const formNewCard = popupNewCard.querySelector('.popup__form')//форму в переменную для обработки сабмита
-
-popupNewCardOpen.addEventListener('click', () => {//открытие попапа 
+popupNewCardOpen.addEventListener('click', () => {//открытие попапа добавления карточки
   togglePopup(popupNewCard);
 })
 
-popupNewCardClose.addEventListener('click', () => {//закрытие попапа 
+popupNewCardClose.addEventListener('click', () => {//закрытие попапа добавления карточки
   togglePopup(popupNewCard)
 })
 
@@ -143,7 +146,7 @@ popupNewCard.addEventListener('click', (event) => {//  ЗАКРЫТИЕ ПОПА
 
 const form = popupNewCard.querySelector('.popup__form')
 
-form.addEventListener('submit', submit);//отправка формы
+form.addEventListener('submit', submit);//отправка формы новой карточки
 
 function submit(event) {
   event.preventDefault()
@@ -162,4 +165,3 @@ function submit(event) {
     form.querySelector('.popup__input_type_image').value = ''
   } else alert('Введите данные в поля')
 }
-
