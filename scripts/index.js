@@ -116,7 +116,6 @@ const closeZoom = popupZoom.querySelector('.popup-zoom__button-close')
 closeZoom.addEventListener('click', () => {
   popupZoom.classList.toggle('popup-zoom_opened');
 })
-console.log(popupZoom);
 
 function handleDeleteButtonClick(event) {//удаление карточки
   const button = event.target;
