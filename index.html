@@ -29,55 +29,7 @@
         </button>
       </section>
       <section class="elements">
-        <!-- <div class="elements__item">
-          <img class="elements__image" src="./images/kara.jpg" alt="Карачаевск">
-          <button type="button" class="elements__trash-button"></button>
-          <div class="elements__container">
-            <h2 class="elements__title">Карачаевск</h2>
-            <button type="button" class="elements__button"></button>
-          </div>
-        </div>
-        <div class="elements__item">
-          <img class="elements__image" src="./images/elbr.jpg" alt="Гора Эльбрус">
-          <button type="button" class="elements__trash-button"></button>
-
-          <div class="elements__container">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button type="button" class="elements__button"></button>
-          </div>
-        </div>
-        <div class="elements__item">
-          <img class="elements__image" src="./images/domb.jpg" alt="Домбай">
-          <button type="button" class="elements__trash-button"></button>
-          <div class="elements__container">
-            <h2 class="elements__title">Домбай</h2>
-            <button type="button" class="elements__button"></button>
-          </div>
-        </div>
-        <div class="elements__item">
-          <img class="elements__image" src="./images/elbr.jpg" alt="Гора Эльбрус">
-          <button type="button" class="elements__trash-button"></button>
-          <div class="elements__container">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button type="button" class="elements__button"></button>
-          </div>
-        </div>
-        <div class="elements__item">
-          <img class="elements__image" src="./images/domb.jpg" alt="Домбай">
-          <button type="button" class="elements__trash-button"></button>
-          <div class="elements__container">
-            <h2 class="elements__title">Домбай</h2>
-            <button type="button" class="elements__button"></button>
-          </div>
-        </div>
-        <div class="elements__item">
-          <img class="elements__image" src="./images/kara.jpg" alt="Карачаевск">
-          <button type="button" class="elements__trash-button"></button>
-          <div class="elements__container">
-            <h2 class="elements__title">Карачаево-Черкессия</h2>
-            <button type="button" class="elements__button"></button>
-          </div>
-        </div> -->
+      <!-- секция для отображения элементов. Добавляются через JS, используя templates и массив объектов -->
       </section>
     </main>
     <footer class="footer">
@@ -85,9 +37,9 @@
     </footer>
     <section class="popup popup_profile">
       <div class="popup__container">
-        <button type="button" class="popup__button-close" aria-label="Закрыть попап"></button>
+        <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="user">
+        <form class="popup__form" name="profile-form">
           <input class="popup__input popup__input_type_name" placeholder="Имя" type="text" name="name">
           <input class="popup__input popup__input_type_job" type="text" placeholder="О себе" name="job">
           <button type="submit" class="popup__button" aria-label="Сохранить изменения">Сохранить</button>
@@ -97,9 +49,9 @@
 
     <section class="popup popup_new-card">
       <div class="popup__container">
-        <button type="button" class="popup__button-close" aria-label="Закрыть попап"></button>
+        <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="user">
+        <form class="popup__form" name="new-card-form">
           <input class="popup__input popup__input_type_name" placeholder="Название" name="name">
           <input class="popup__input popup__input_type_image" placeholder="Ссылка на картинку" name="image">
           <button type="submit" class="popup__button" aria-label="Сохранить изменения">Создать</button>
@@ -107,10 +59,10 @@
       </div>
     </section>
 
-    <section class="popup-zoom">
+    <section class="popup popup-zoom">
       <div class="popup-zoom__container">
         <img src="/images/domb.jpg" alt="Увеличенное изображение" class="popup-zoom__image">
-        <button type="button" class="popup-zoom__button-close" aria-label="Закрыть попап"></button>
+        <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
         <p class="popup-zoom__title">Текст с названием карточки</p>
       </div>
     </section>

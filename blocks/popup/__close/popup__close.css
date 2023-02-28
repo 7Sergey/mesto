@@ -1,4 +1,4 @@
-.popup-zoom__button-close {
+.popup__close {
   position: absolute;
   top: -40px;
   right: -40px;
@@ -13,12 +13,12 @@
 }
 
 
-.popup-zoom__button-close:hover {
+.popup__close:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 1000px) {
-  .popup-zoom__button-close {
+  .popup__close {
     width: 20px;
     height: 20px;
     right: 0px;
