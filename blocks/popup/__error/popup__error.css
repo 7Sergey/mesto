@@ -1,0 +1,13 @@
+.popup__error {
+  display: none;
+  color: black;
+  position: relative;
+  top: -22px;
+
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+
+  color: #FF0000;
+}

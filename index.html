@@ -29,7 +29,7 @@
         </button>
       </section>
       <section class="elements">
-      <!-- секция для отображения элементов. Добавляются через JS, используя templates и массив объектов -->
+        <!-- секция для отображения элементов. Добавляются через JS, используя templates и массив объектов -->
       </section>
     </main>
     <footer class="footer">
@@ -39,9 +39,13 @@
       <div class="popup__container">
         <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="profile-form">
-          <input class="popup__input popup__input_type_name" placeholder="Имя" type="text" name="name">
-          <input class="popup__input popup__input_type_job" type="text" placeholder="О себе" name="job">
+        <form class="popup__form" name="profile-form" novalidate>
+          <input class="popup__input popup__input_type_name" placeholder="Имя" type="text" name="profile" minlength="2"
+            maxlength="40" required>
+          <span class="popup__error" id="profile-error"></span>
+          <input class="popup__input popup__input_type_job" type="text" placeholder="О себе" name="job" minlength="2"
+            maxlength="200" required>
+          <span class="popup__error" id="job-error"></span>
           <button type="submit" class="popup__button" aria-label="Сохранить изменения">Сохранить</button>
         </form>
       </div>
@@ -51,9 +55,13 @@
       <div class="popup__container">
         <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="new-card-form">
-          <input class="popup__input popup__input_type_name" placeholder="Название" name="name">
-          <input class="popup__input popup__input_type_image" placeholder="Ссылка на картинку" name="image">
+        <form class="popup__form" name="new-card-form" novalidate>
+          <input class="popup__input popup__input_type_name" placeholder="Название" name="name" minlength="2"
+            maxlength="30" required>
+          <span class="popup__error" id="name-error"></span>
+          <input class="popup__input popup__input_type_image" placeholder="Ссылка на картинку" name="image" type="url"
+            required>
+          <span class="popup__error" id="image-error"></span>
           <button type="submit" class="popup__button" aria-label="Сохранить изменения">Создать</button>
         </form>
       </div>
@@ -78,7 +86,9 @@
       </div>
     </template>
   </div>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
+  <!-- <script src="./scripts/validate.js"></script> -->
 </body>
 
 </html>
