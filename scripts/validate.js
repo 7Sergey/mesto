@@ -1,11 +1,11 @@
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
-const obj = {
+const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
-  // delete
+  
   inputErrorClass: 'popup__input_type_error',
   activeErrorClass: 'popup__error_visible',
   errorIdTemplate: '-error',
@@ -45,35 +45,45 @@ function enableButton(submitButton, inactiveButtonClass) {
   submitButton.classList.remove(inactiveButtonClass)
   submitButton.disabled = false
 }
+function addInputClassError(input, inputErrorClass) {
+  console.log(input);
+  input.classList.add(inputErrorClass)
+}
+
+function removeInputClassError(input, inputErrorClass) {
+  console.log(input);
+  input.classList.remove(inputErrorClass)
+}
 
 
-
-function checkInputValidity(input, errorIdTemplate, activeErrorClass) {
+function checkInputValidity(input, errorIdTemplate, activeErrorClass, inputErrorClass) {
   const errorTextElement = document.querySelector(`#${input.name}${errorIdTemplate}`)
   if (!input.validity.valid) {
     showInputError(errorTextElement, input.validationMessage, activeErrorClass)
+    addInputClassError(input, inputErrorClass)
   } else {
     hideInputError(errorTextElement, activeErrorClass)
+    removeInputClassError(input, inputErrorClass)
   }
 }
 
-function setEventListeners(inputList, errorIdTemplate, activeErrorClass, submitButton, inactiveButtonClass) {
+function setEventListeners(inputList, errorIdTemplate, activeErrorClass, submitButton, inactiveButtonClass, inputErrorClass) {
   inputList.forEach((input) => {
     input.addEventListener('input', () => {
-      checkInputValidity(input, errorIdTemplate, activeErrorClass)
+      checkInputValidity(input, errorIdTemplate, activeErrorClass, inputErrorClass)
       toggleButtonState(submitButton, inactiveButtonClass, inputList)
     })
   })
 }
 
-function enableValidation(obj) {
-  const formList = document.querySelectorAll(obj.formSelector)
+function enableValidation(config) {
+  const formList = document.querySelectorAll(config.formSelector)
   formList.forEach((form) => {
-    const inputList = form.querySelectorAll(obj.inputSelector)
-    const submitButton = form.querySelector(obj.submitButtonSelector)
+    const inputList = form.querySelectorAll(config.inputSelector)
+    const submitButton = form.querySelector(config.submitButtonSelector)
 
-    setEventListeners(inputList, obj.errorIdTemplate, obj.activeErrorClass, submitButton, obj.inactiveButtonClass);
+    setEventListeners(inputList, config.errorIdTemplate, config.activeErrorClass, submitButton, config.inactiveButtonClass, config.inputErrorClass);
   })
 }
 
-enableValidation(obj);
+enableValidation(config);
