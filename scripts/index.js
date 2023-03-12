@@ -17,6 +17,7 @@ const popupNewCardOpen = document.querySelector('.profile__add-button');
 const newCardForm = document.forms["new-card-form"];//обращение к форме через аттрибут 'name'
 const nameCard = newCardForm.querySelector('.popup__input_type_name')
 const imageCard = newCardForm.querySelector('.popup__input_type_image')
+const buttonSubmitNewCard = newCardForm.querySelector('.popup__button')//кнопка сабмита новой карточки
 
 
 const userNameElement = document.querySelector('.profile__title')// Заголовок и подзаголовок на странице
@@ -67,12 +68,16 @@ popups.forEach((popup) => {
   })
 })
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-}
+
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', (e) => closePopupEscape(e, popup))//слушатель для закрытия
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', (e) => closePopupEscape(e, popup))// снятие слушателя для закрытия
 }
 
 function handleProfileFormSubmit(evt) {//отправка формы профиля evt -- параметр, передаваемый кликом
@@ -113,7 +118,7 @@ function getCard(card) {//создание одной карточки
 }
 
 
-function openImagePopup(event) {
+function openImagePopup(event) {//открытие попапа зума
   openPopup(popupZoom);
   const image = event.target.getAttribute('src')
   zoomImage.setAttribute("src", image)
@@ -144,5 +149,13 @@ function handleNewCardFormSubmit(event) {
     createCard(card)
     closePopup(popupNewCard)
     event.target.reset()//обнуление значений полей формы(импутов)
+    buttonSubmitNewCard.classList.add('popup__button_disabled')//дизейбл кнопки
+    buttonSubmitNewCard.disabled = true
   } else alert('Введите данные в поля')
+}
+
+function closePopupEscape(e, popup) {//закрытие попапа по Escape
+  if (e.key === 'Escape') {
+    closePopup(popup)
+  }
 }
