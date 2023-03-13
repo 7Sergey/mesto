@@ -68,16 +68,22 @@ popups.forEach((popup) => {
   })
 })
 
+function closePopupEscape(e) {//закрытие попапа по Escape
+  if (e.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened')
+    closePopup(popupOpened)
+  }
+}
 
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', (e) => closePopupEscape(e, popup))//слушатель для закрытия
+  document.addEventListener('keydown', closePopupEscape)//слушатель для закрытия
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', (e) => closePopupEscape(e, popup))// снятие слушателя для закрытия
+  document.removeEventListener('keydown', closePopupEscape)// снятие слушателя для закрытия
 }
 
 function handleProfileFormSubmit(evt) {//отправка формы профиля evt -- параметр, передаваемый кликом
@@ -101,13 +107,17 @@ function createCard(card) {
   elements.prepend(newCard) //добавляем карточку в начало секции elements
 }
 function getCard(card) {//создание одной карточки
-  const cardElement = document.querySelector('.template').content.cloneNode(true);
+
+  const cardTemplate = document.querySelector('.template').content;
+  const cardElement = cardTemplate.querySelector('.elements__item').cloneNode(true);
+
+ 
   const cardTitleTemplate = cardElement.querySelector('.card__title');
   cardTitleTemplate.textContent = card.name
   const cardImageTemplate = cardElement.querySelector('.card__image')
   cardImageTemplate.setAttribute('src', card.image)
   cardImageTemplate.setAttribute('alt', card.name)
-  cardImageTemplate.addEventListener('click', openImagePopup);//открытие попапа зума
+  cardImageTemplate.addEventListener('click', () => openImagePopup(card.image, card.name));//открытие попапа зума
   const buttonDelete = cardElement.querySelector('.card__trash-button')//удаление
   buttonDelete.addEventListener('click', handleDeleteButtonClick)
   const likeButton = cardElement.querySelector('.card__button')//лайки
@@ -118,12 +128,11 @@ function getCard(card) {//создание одной карточки
 }
 
 
-function openImagePopup(event) {//открытие попапа зума
+function openImagePopup(image, name) {//открытие попапа зума
   openPopup(popupZoom);
-  const image = event.target.getAttribute('src')
   zoomImage.setAttribute("src", image)
-  const zoomTitleTarget = event.target.closest('.card').querySelector('.card__title').textContent
-  zoomTitle.textContent = zoomTitleTarget
+  zoomImage.setAttribute('alt', `Увеличенное изображение ${name}`)
+  zoomTitle.textContent = name
 }
 
 function handleDeleteButtonClick(event) {//удаление карточки
@@ -151,11 +160,6 @@ function handleNewCardFormSubmit(event) {
     event.target.reset()//обнуление значений полей формы(импутов)
     buttonSubmitNewCard.classList.add('popup__button_disabled')//дизейбл кнопки
     buttonSubmitNewCard.disabled = true
-  } else alert('Введите данные в поля')
-}
-
-function closePopupEscape(e, popup) {//закрытие попапа по Escape
-  if (e.key === 'Escape') {
-    closePopup(popup)
   }
 }
+
