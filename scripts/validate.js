@@ -46,12 +46,10 @@ function enableButton(submitButton, inactiveButtonClass) {
   submitButton.disabled = false
 }
 function addInputClassError(input, inputErrorClass) {
-  console.log(input);
   input.classList.add(inputErrorClass)
 }
 
 function removeInputClassError(input, inputErrorClass) {
-  console.log(input);
   input.classList.remove(inputErrorClass)
 }
 
