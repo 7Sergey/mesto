@@ -1,4 +1,4 @@
-import openPopup from './index.js'
+import { openImagePopup } from './index.js'
 
 class Card {
   constructor(data, cardTemplateSelector) {
@@ -20,29 +20,21 @@ class Card {
   }
 
   _handleCardLike() {
-    this._likeButton.classList.toggle('elements__button_active')
+    this._buttonLike.classList.toggle('elements__button_active')
   }
 
   _handleCardDelete() {
     this._element.remove()
   }
 
-  _handle_CardImageOpen(image, name) {
+  _handleCardImageOpen() {
     // открытие зума
-
-    //попап зум
-    const popupZoom = document.querySelector('.popup-zoom')
-    const zoomImage = popupZoom.querySelector('.popup-zoom__image') //добавление аттрибута для картинки
-    const zoomTitle = popupZoom.querySelector('.popup-zoom__title')
-    openPopup(popupZoom)
-    zoomImage.setAttribute('src', image)
-    zoomImage.setAttribute('alt', `Увеличенное изображение ${name}`)
-    zoomTitle.textContent = name
+    openImagePopup(this._name, this._image)
   }
 
   //слушатели
   _setEventListeners() {
-    this._likeButton.addEventListener('click', () => {
+    this._buttonLike.addEventListener('click', () => {
       this._handleCardLike()
     })
 
@@ -51,7 +43,7 @@ class Card {
     })
 
     this._cardImage.addEventListener('click', () => {
-      this._handle_CardImageOpen(this._image, this._name)
+      this._handleCardImageOpen()
     })
   }
 
@@ -61,10 +53,10 @@ class Card {
     this._cardTitle = this._element.querySelector('.card__title')
     this._cardTitle.textContent = this._name
     this._cardImage = this._element.querySelector('.card__image')
-    this._cardImage.setAttribute('alt', this._name)
-    this._cardImage.setAttribute('src', this._image)
+    this._cardImage.alt = this._name
+    this._cardImage.src = this._image
     this._buttonDelete = this._element.querySelector('.card__trash-button') //кнопка удаления
-    this._likeButton = this._element.querySelector('.card__button') //лайки
+    this._buttonLike = this._element.querySelector('.card__button') //лайки
 
     this._setEventListeners()
 

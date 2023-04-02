@@ -1,93 +1,82 @@
 class FormValidator {
-  constructor(config, form) {
-    // const {inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, activeErrorClass, errorIdTemplate} = config СДЕЛАТЬ ДЕСТРУКТУРИЗАЦИЮ
-    this._form = document.querySelector(form)
-    this._inputList = this._form.querySelectorAll(config.inputSelector)
-    this._submitButton = this._form.querySelector(config.submitButtonSelector)
-    this._inactiveButtonClass = config.inactiveButtonClass
-    this._inputErrorClass = config.inputErrorClass
-    this._activeErrorClass = config.activeErrorClass
-    this._errorIdTemplate = config.errorIdTemplate
+  constructor(config, selector) {
+    const {
+      inputSelector,
+      buttonSubmitSelector,
+      inactiveButtonClass,
+      inputErrorClass,
+      activeErrorClass,
+      errorIdTemplate,
+    } = config
+    this._form = document.querySelector(selector)
+    this._inputList = this._form.querySelectorAll(inputSelector)
+    this._buttonSubmit = this._form.querySelector(buttonSubmitSelector)
+    this._inactiveButtonClass = inactiveButtonClass
+    this._inputErrorClass = inputErrorClass
+    this._activeErrorClass = activeErrorClass
+    this._errorIdTemplate = errorIdTemplate
+    this._errorTextElement = undefined
   }
-
   enableValidation() {
     this._inputList.forEach((input) => {
       input.addEventListener('input', () => {
-        this._checkInputValidity(
-          input,
-          this._errorIdTemplate,
-          this._activeErrorClass,
-          this._inputErrorClass
-        )
-        this._toggleButtonState(
-          this._submitButton,
-          this._inactiveButtonClass,
-          this._inputList
-        )
+        this._checkInputValidity(input)
+        this._toggleButtonState()
       })
     })
   }
 
-  _checkInputValidity(
-    input,
-    errorIdTemplate,
-    activeErrorClass,
-    inputErrorClass
-  ) {
+  _checkInputValidity(input) {
     this._errorTextElement = document.querySelector(
-      `#${input.name}${errorIdTemplate}`
+      `#${input.name}${this._errorIdTemplate}`
     )
     if (!input.validity.valid) {
-      this._showInputError(
-        this._errorTextElement,
-        input.validationMessage,
-        activeErrorClass
-      )
-      this._addInputClassError(input, inputErrorClass)
+      this._showInputError(input.validationMessage)
+      this._addInputClassError(input)
     } else {
-      this._hideInputError(this._errorTextElement, activeErrorClass)
-      this._removeInputClassError(input, inputErrorClass)
+      this._hideInputError()
+      this._removeInputClassError(input)
     }
   }
 
-  _hasInvalidInput(inputList) {
-    return Array.from(inputList).some((input) => !input.validity.valid)
+  _hasInvalidInput() {
+    return Array.from(this._inputList).some((input) => !input.validity.valid)
   }
 
-  _toggleButtonState(submitButton, inactiveButtonClass, inputList) {
-    if (!this._hasInvalidInput(inputList)) {
-      this._enableButton(submitButton, inactiveButtonClass)
+  _toggleButtonState() {
+    if (!this._hasInvalidInput(this._inputList)) {
+      this._enableButton()
     } else {
-      this._disabledButton(submitButton, inactiveButtonClass)
+      this.disableButton()
     }
   }
 
-  _showInputError(errorTextElement, validationMessage, activeErrorClass) {
-    errorTextElement.textContent = validationMessage
-    errorTextElement.classList.add(activeErrorClass)
+  _showInputError(validationMessage) {
+    this._errorTextElement.textContent = validationMessage
+    this._errorTextElement.classList.add(this._activeErrorClass)
   }
 
-  _hideInputError(errorTextElement, activeErrorClass) {
-    errorTextElement.textContent = ''
-    errorTextElement.classList.remove(activeErrorClass)
+  _hideInputError() {
+    this._errorTextElement.textContent = ''
+    this._errorTextElement.classList.remove(this._activeErrorClass)
   }
 
-  _addInputClassError(input, inputErrorClass) {
-    input.classList.add(inputErrorClass)
+  _addInputClassError(input) {
+    input.classList.add(this._inputErrorClass)
   }
 
-  _removeInputClassError(input, inputErrorClass) {
-    input.classList.remove(inputErrorClass)
+  _removeInputClassError(input) {
+    input.classList.remove(this._inputErrorClass)
   }
 
-  _disabledButton(submitButton, inactiveButtonClass) {
-    submitButton.classList.add(inactiveButtonClass)
-    submitButton.disabled = true
+  disableButton() {
+    this._buttonSubmit.classList.add(this._inactiveButtonClass)
+    this._buttonSubmit.disabled = true
   }
 
-  _enableButton(submitButton, inactiveButtonClass) {
-    submitButton.classList.remove(inactiveButtonClass)
-    submitButton.disabled = false
+  _enableButton() {
+    this._buttonSubmit.classList.remove(this._inactiveButtonClass)
+    this._buttonSubmit.disabled = false
   }
 }
 

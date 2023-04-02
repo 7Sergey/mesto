@@ -1,7 +1,7 @@
 import initialCards from './data/initialCards.js'
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
-import configForClass from './data/configForClass.js'
+import validationConfig from './data/validationConfig.js'
 
 // //попап профиля
 const popupProfile = document.querySelector('.popup_profile')
@@ -18,31 +18,34 @@ const zoomTitle = popupZoom.querySelector('.popup-zoom__title')
 //ПОПАП ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ
 const popupNewCard = document.querySelector('.popup_new-card')
 const popupNewCardOpen = document.querySelector('.profile__add-button')
-const newCardForm = document.forms['new-card-form'] //обращение к форме через аттрибут 'name'
-const nameCard = newCardForm.querySelector('.popup__input_type_name')
-const imageCard = newCardForm.querySelector('.popup__input_type_image')
-const buttonSubmitNewCard = newCardForm.querySelector('.popup__button') //кнопка сабмита новой карточки
+const formNewCard = document.forms['new-card-form'] //обращение к форме через аттрибут 'name'
+const nameCard = formNewCard.querySelector('.popup__input_type_name')
+const imageCard = formNewCard.querySelector('.popup__input_type_image')
+const buttonSubmitNewCard = formNewCard.querySelector('.popup__button') //кнопка сабмита новой карточки
 
 const userNameElement = document.querySelector('.profile__title') // Заголовок и подзаголовок на странице
 const userJobElement = document.querySelector('.profile__subtitle')
 
 const popups = document.querySelectorAll('.popup') //все попапы
-const elements = document.querySelector('.elements')
+const cardsContainer = document.querySelector('.elements')
 
-initialCards.forEach(createCard) //перебор массива объектов с созданием карточек
+const cardFormValidator = new FormValidator(
+  validationConfig,
+  '.popup__form_new-card'
+)
 
-popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      //если цель -- вне попапа -- закрываем
-      closePopup(popup)
-    }
-    if (evt.target.classList.contains('popup__close')) {
-      // если цель -- кнопка закрытия, закрыть попап
-      closePopup(popup)
-    }
-  })
-})
+const profileFormValidator = new FormValidator(
+  validationConfig,
+  '.popup__form_profile'
+)
+
+export function openImagePopup(name, image) {
+  // настраиваем попап
+  openPopup(popupZoom)
+  zoomImage.src = image
+  zoomImage.alt = `Увеличенное изображение ${name}`
+  zoomTitle.textContent = name
+}
 
 function closePopupEscape(e) {
   //закрытие попапа по Escape
@@ -70,6 +73,43 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupProfile)
 }
 
+function createCardElement(card) {
+  const cardNew = new Card(card, '.template') //создал экземпляр класса
+  const cardElement = cardNew.generateCard() //сгенерироал готовый элемент
+
+  return cardElement
+}
+
+function createCard(card) {
+  const cardElement = createCardElement(card)
+  cardsContainer.prepend(cardElement)
+}
+
+function handleformNewCardSubmit(event) {
+  event.preventDefault()
+  const card = {
+    name: nameCard.value,
+    image: imageCard.value,
+  }
+  createCard(card)
+  closePopup(popupNewCard)
+  event.target.reset() //обнуление значений полей формы(импутов)
+  cardFormValidator.disableButton()
+}
+
+popupNewCardOpen.addEventListener('click', () => {
+  //открытие попапа добавления карточки
+  openPopup(popupNewCard)
+})
+
+formNewCard.addEventListener('submit', handleformNewCardSubmit) //отправка формы новой карточки
+
+profileFormValidator.enableValidation()
+
+cardFormValidator.enableValidation()
+
+initialCards.forEach(createCard) //перебор массива объектов с созданием карточек
+
 popupProfileOpen.addEventListener('click', () => {
   //открытие попапа профиля
   userNameInput.value = userNameElement.textContent
@@ -79,39 +119,14 @@ popupProfileOpen.addEventListener('click', () => {
 
 profileForm.addEventListener('submit', handleProfileFormSubmit) // сохранения изменений в форме профиля
 
-function createCard(card) {
-  const newCard = new Card(card, '.template') //создал экземпляр класса
-  const el = newCard.generateCard() //сгенерироал готовый элемент
-  elements.prepend(el) //добавил на страницу
-}
-
-popupNewCardOpen.addEventListener('click', () => {
-  //открытие попапа добавления карточки
-  openPopup(popupNewCard)
-})
-
-newCardForm.addEventListener('submit', handleNewCardFormSubmit) //отправка формы новой карточки
-
-function handleNewCardFormSubmit(event) {
-  event.preventDefault()
-  if (nameCard.value && imageCard.value) {
-    const card = {
-      name: nameCard.value,
-      image: imageCard.value,
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      //если цель -- вне попапа -- закрываем
+      closePopup(popup)
+    } else if (evt.target.classList.contains('popup__close')) {
+      // если цель -- кнопка закрытия, закрыть попап
+      closePopup(popup)
     }
-    createCard(card)
-    closePopup(popupNewCard)
-    event.target.reset() //обнуление значений полей формы(импутов)
-    buttonSubmitNewCard.classList.add('popup__button_disabled') //дизейбл кнопки
-    buttonSubmitNewCard.disabled = true
-  }
-}
-
-const popupFormProfile = new FormValidator(
-  configForClass,
-  '.popup__form_profile'
-)
-popupFormProfile.enableValidation()
-
-const popupNewClass = new FormValidator(configForClass, '.popup__form_new-card')
-popupNewClass.enableValidation()
+  })
+})
