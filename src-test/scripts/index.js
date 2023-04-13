@@ -1,3 +1,5 @@
+import 'core-js/actual'
+
 import initialCards from './data/initialCards.js'
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
