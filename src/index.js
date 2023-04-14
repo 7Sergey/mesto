@@ -1,4 +1,7 @@
 // import 'core-js/actual'
+import './index.css'
+import image from './domb.jpg'
 
-const f = 6
-console.log(`dada ${f}`)
+const element = document.createElement('img')
+element.src = image
+document.body.append(element)

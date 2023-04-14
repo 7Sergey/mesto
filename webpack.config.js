@@ -1,4 +1,6 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -10,16 +12,31 @@ module.exports = {
   },
   devServer: {
     port: 8080,
-    hot: true,
     compress: true,
+    hot: true,
   },
   module: {
     rules: [
       {
-        test: '/.js$/',
+        test: '/\.js$/',
         use: 'babel-loader',
-        exclude: '/nome_modules/',
+        exclude: '/node_modules/',
       },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        exclude: '/node_modules/',
+      },
+      {
+        test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
+        type:'asset/resource'
+      }
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+    }),
+    new MiniCssExtractPlugin(),
+  ],
 }
