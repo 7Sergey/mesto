@@ -1,4 +1,5 @@
-import 'core-js/actual'
+// import 'core-js/actual'
+import '../pages/index.css'
 
 import initialCards from './data/initialCards.js'
 import Card from './Card.js'

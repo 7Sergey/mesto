@@ -11,27 +11,6 @@
       content="width=device-width, initial-scale=1.0"
     />
     <title>Mesto</title>
-    <link
-      rel="stylesheet"
-      href="./pages/index.css"
-    />
-
-    <script
-      type="module"
-      src="./scripts/index.js"
-    ></script>
-    <script
-      type="module"
-      src="./scripts/Card.js"
-    ></script>
-    <script
-      type="module"
-      src="./scripts/data/initialCards.js"
-    ></script>
-    <script
-      src="./scripts/data/validationConfig.js"
-      type="module"
-    ></script>
   </head>
 
   <body class="body">
@@ -42,10 +21,11 @@
       <main class="main">
         <section class="profile">
           <img
-            src="./images/image.jpg"
+            src="<%=require('./images/image.jpg')%>"
             alt="Картинка профиля"
             class="profile__avatar"
           />
+
           <div class="profile__info">
             <div class="profile__container">
               <h1 class="profile__title">Жак-Ив Кусто</h1>

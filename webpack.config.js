@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src-test/scripts/index.js',
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -18,7 +18,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: '/\.js$/',
+        test: '/.js$/',
         use: 'babel-loader',
         exclude: '/node_modules/',
       },
@@ -29,13 +29,13 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
-        type:'asset/resource'
-      }
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src-test/index.html',
     }),
     new MiniCssExtractPlugin(),
   ],
