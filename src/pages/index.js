@@ -30,7 +30,7 @@ const popupNewCard = new PopupWithForm({
     cardList.addItem(createCardElement(data))
 
     popupNewCard.close()
-    popupNewCard.disableBunnot()
+    popupNewCard.disableButton()
   },
 })
 

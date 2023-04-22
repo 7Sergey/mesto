@@ -8,7 +8,7 @@ export default class PopupWithForm extends Popup {
     this._button = this._form.querySelector('.popup__button')
   }
 
-  disableBunnot() {
+  disableButton() {
     this._button.classList.add('popup__button_disabled')
     this._button.disabled = true
   }
