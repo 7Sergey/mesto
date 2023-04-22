@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: './src-test/scripts/index.js',
+  entry: './src/pages/index.js',
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -12,8 +12,8 @@ module.exports = {
   },
   devServer: {
     port: 8080,
-    compress: true,
-    hot: true,
+    // compress: true,
+    // hot: true,
   },
   module: {
     rules: [
@@ -28,14 +28,14 @@ module.exports = {
         exclude: '/node_modules/',
       },
       {
-        test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
+        test: /.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
         type: 'asset/resource',
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src-test/index.html',
+      template: './src/index.html',
     }),
     new MiniCssExtractPlugin(),
   ],

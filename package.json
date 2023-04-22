@@ -2,9 +2,9 @@
   "name": "mesto",
   "version": "1.0.0",
   "description": "",
-  "main": "./src-test/scripts/index.js",
+  "main": "./src/pages/index.js",
   "scripts": {
-    "dev": "webpack serve",
+    "dev": "webpack serve --mode=development --open --progress --hot",
     "build": "webpack"
   },
   "repository": {
