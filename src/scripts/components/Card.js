@@ -1,11 +1,12 @@
-import { openImagePopup } from '../../pages/index.js'
+// import { openImagePopup } from '../../pages/index.js'
 
 class Card {
-  constructor(data, cardTemplateSelector) {
+  constructor(data, handleCardClick, cardTemplateSelector) {
     this._name = data.name
     this._image = data.image
     this._cardTemplateSelector = cardTemplateSelector
     this._element = undefined //тут будет храниться результат функции getTemplate
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -27,11 +28,6 @@ class Card {
     this._element.remove()
   }
 
-  _handleCardImageOpen() {
-    // открытие зума
-    openImagePopup(this._name, this._image)
-  }
-
   //слушатели
   _setEventListeners() {
     this._buttonLike.addEventListener('click', () => {
@@ -43,7 +39,7 @@ class Card {
     })
 
     this._cardImage.addEventListener('click', () => {
-      this._handleCardImageOpen()
+      this._handleCardClick({ name: this._name, image: this._image })
     })
   }
 

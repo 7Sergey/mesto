@@ -18,7 +18,6 @@ export default class PopupWithForm extends Popup {
 
       const inputValues = this._getInputValues() //получил объект с данными инпутов
 
-      console.log(inputValues)
       this._handleFormSubmit(inputValues) //передал объект с данными инпутов в колбек
       this.close()
     })

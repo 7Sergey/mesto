@@ -91,7 +91,13 @@ popupNewCard.setEventListeners()
 
 function createCardElement(card) {
   //создание карточки
-  const cardNew = new Card(card, '.template') //создал экземпляр класса
+  const cardNew = new Card(
+    card,
+    () => {
+      openImagePopup(card)
+    },
+    '.template'
+  ) //создал экземпляр класса
   const cardElement = cardNew.generateCard() //сгенерироал готовый элемент
 
   return cardElement
@@ -110,7 +116,7 @@ function createCardElement(card) {
 //   popupNEWCARD.close()
 // }
 
-export function openImagePopup(name, image) {
+export function openImagePopup({ name, image }) {
   const popupZoom = new PopupWithImage('.popup-zoom', name, image)
   popupZoom.open()
   popupZoom.setEventListeners()
