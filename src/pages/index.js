@@ -11,7 +11,7 @@ import { api } from '../scripts/components/Api'
 import PopupConfirm from '../scripts/components/PopupConfirm.js'
 
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button')
-const userNameInput = document.querySelector('.popup__input_type_name') //поля в форме
+const userNameInput = document.querySelector('.popup__input_type_profile') //поля в форме
 const userJobInput = document.querySelector('.popup__input_type_about')
 const buttonOpenPopupNewCard = document.querySelector('.profile__add-button')
 const profileAvatar = document.querySelector('.profile__avatar')
@@ -129,12 +129,10 @@ function createCardElement(card) {
     (id) => {
       if (cardNew.isLiked()) {
         api.deleteLike(id).then((res) => {
-          // console.log(res.likes)
           cardNew.setLikes(res.likes)
         })
       } else {
         api.setLike(id).then((res) => {
-          // console.log(res.likes)
           cardNew.setLikes(res.likes)
         })
       }
