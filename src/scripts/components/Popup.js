@@ -3,6 +3,11 @@ export default class Popup {
     this._popup = document.querySelector(selector)
   }
 
+  setButtonText(text) {
+    this._button = this._popup.querySelector('.popup__button')
+    this._button.textContent = text
+  }
+
   open() {
     this._popup.classList.add('popup_opened')
     document.addEventListener('keydown', this._handleEscClose) //слушатель для закрытия

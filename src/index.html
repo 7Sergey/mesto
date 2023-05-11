@@ -20,22 +20,24 @@
       </header>
       <main class="main">
         <section class="profile">
-          <img
-            src="<%=require('./images/image.jpg')%>"
+          <div class="profile__button">
+            <img
             alt="Картинка профиля"
             class="profile__avatar"
           />
+          </div>
+        
 
           <div class="profile__info">
             <div class="profile__container">
-              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <h1 class="profile__title"></h1>
               <button
                 type="button"
                 class="profile__edit-button"
                 title="Редактировать профиль"
               ></button>
             </div>
-            <p class="profile__subtitle">Исследователь океана</p>
+            <p class="profile__subtitle"></p>
           </div>
           <button
             type="button"
@@ -67,27 +69,27 @@
               class="popup__input popup__input_type_name"
               placeholder="Имя"
               type="text"
-              name="profile"
+              name="name"
               minlength="2"
               maxlength="40"
               required
             />
             <span
               class="popup__error"
-              id="profile-error"
+              id="name-error"
             ></span>
             <input
-              class="popup__input popup__input_type_job"
+              class="popup__input popup__input_type_about"
               type="text"
               placeholder="О себе"
-              name="job"
+              name="about"
               minlength="2"
               maxlength="200"
               required
             />
             <span
               class="popup__error"
-              id="job-error"
+              id="about-error"
             ></span>
             <button
               type="submit"
@@ -126,15 +128,15 @@
               id="name-error"
             ></span>
             <input
-              class="popup__input popup__input_type_image"
+              class="popup__input popup__input_type_link"
               placeholder="Ссылка на картинку"
-              name="image"
+              name="link"
               type="url"
               required
             />
             <span
               class="popup__error"
-              id="image-error"
+              id="link-error"
             ></span>
             <button
               type="submit"
@@ -143,6 +145,66 @@
               disabled
             >
               Создать
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section class="popup popup_avatar">
+        <div class="popup__container">
+          <button
+            type="button"
+            class="popup__close"
+            aria-label="Закрыть попап"
+          ></button>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form
+            class="popup__form popup__form_avatar"
+            name="new-card-form"
+            novalidate
+          >
+            <input
+              class="popup__input popup__input_type_link"
+              placeholder="Ссылка на картинку"
+              name="avatar"
+              type="url"
+              required
+            />
+            <span
+              class="popup__error"
+              id="avatar-error"
+            ></span>
+            <button
+              type="submit"
+              class="popup__button popup__button_disabled"
+              aria-label="Сохранить изменения"
+              disabled
+            >
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section class="popup popup_confirm-delete">
+        <div class="popup__container">
+          <button
+            type="button"
+            class="popup__close"
+            aria-label="Закрыть попап"
+          ></button>
+          <h2 class="popup__title popup__title_type_confirm-delete">Вы уверены?</h2>
+          <form
+            class="popup__form"
+            name="popup_confirm-delete"
+            novalidate
+          >
+            <button
+              type="submit"
+              class="popup__button"
+              aria-label="Сохранить изменения"
+            >
+              Да
             </button>
           </form>
         </div>
@@ -173,10 +235,12 @@
           ></button>
           <div class="elements__container card__container">
             <h2 class="elements__title card__title"></h2>
-            <button
-              type="button"
-              class="elements__button card__button"
-            ></button>
+            <div class="elements__likes-container">
+              <button
+                type="button"
+                class="elements__button card__button"
+              ></button>
+              <p class="elements__likes-counter card__likes-counter"></p>
           </div>
         </div>
       </template>

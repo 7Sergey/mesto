@@ -21,11 +21,10 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners()
     this._form.addEventListener('submit', (e) => {
       e.preventDefault()
-
       const inputValues = this._getInputValues() //получил объект с данными инпутов
 
       this._handleFormSubmit(inputValues) //передал объект с данными инпутов в колбек
-      this.close()
+      // this.close()
     })
   }
   _getInputValues() {

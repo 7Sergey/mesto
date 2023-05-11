@@ -6,10 +6,10 @@ export default class PopupWithImage extends Popup {
     this._zoomImage = this._popup.querySelector('.popup-zoom__image')
     this._zoomTitle = this._popup.querySelector('.popup-zoom__title')
   }
-  open(name, image) {
+  open(name, link) {
     super.open()
     this._name = name
-    this._image = image
+    this._image = link
 
     this._zoomImage.src = this._image
     this._zoomImage.alt = `Увеличенное изображение ${this._name}`

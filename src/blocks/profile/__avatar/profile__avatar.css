@@ -5,3 +5,7 @@
   object-fit: cover;
   object-position: center;
 }
+.profile__avatar:hover {
+  opacity: 0.2;
+  background-image: url('../../../images/likeb.svg');
+}
