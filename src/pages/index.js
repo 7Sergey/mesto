@@ -18,16 +18,22 @@ const profileAvatar = document.querySelector('.profile__avatar')
 
 let userId
 
-api.getProfile().then((res) => {
-  userInfo.setUserInfo(res)
-  userId = res._id
+api
+  .getProfile()
+  .then((res) => {
+    userInfo.setUserInfo(res)
+    userId = res._id
 
-  api.getCards().then((cards) => {
-    cards.forEach((data) => {
-      renderCard(data)
-    })
+    api
+      .getCards()
+      .then((cards) => {
+        cards.forEach((data) => {
+          renderCard(data)
+        })
+      })
+      .catch(console.log)
   })
-})
+  .catch(console.log)
 
 const cardFormValidator = new FormValidator(
   validationConfig,
@@ -48,13 +54,18 @@ const popupNewCard = new PopupWithForm({
   handleFormSubmit: (data) => {
     popupNewCard.setButtonText('Сохранение...')
 
-    api.addCard(data).then((res) => {
-      renderCard(res)
-      popupNewCard.setButtonText('Создать')
+    api
+      .addCard(data)
+      .then((res) => {
+        renderCard(res)
 
-      popupNewCard.close()
-      popupNewCard.disableButton()
-    })
+        popupNewCard.close()
+        popupNewCard.disableButton()
+      })
+      .catch(console.log)
+      .finally(() => {
+        popupNewCard.setButtonText('Создать')
+      })
   },
 })
 
@@ -79,11 +90,17 @@ const popupAvatar = new PopupWithForm({
   selector: '.popup_avatar',
   handleFormSubmit: (data) => {
     popupAvatar.setButtonText('Сохранение...')
-    api.editAvatar(data.avatar).then((res) => {
-      userInfo.setUserInfo(res) //после отправки данных на сервер, отрисовываем их на странице
-      popupAvatar.setButtonText('Сохранить')
-      popupAvatar.close()
-    })
+    api
+      .editAvatar(data.avatar)
+      .then((res) => {
+        userInfo.setUserInfo(res) //после отправки данных на сервер, отрисовываем их на странице
+        // popupAvatar.setButtonText('Сохранить')
+        popupAvatar.close()
+      })
+      .catch(console.log)
+      .finally(() => {
+        popupAvatar.setButtonText('Сохранить')
+      })
   },
 })
 
@@ -92,12 +109,17 @@ const popupProfile = new PopupWithForm({
   handleFormSubmit: (data) => {
     popupProfile.setButtonText('Сохранение...')
 
-    api.editProfile(data).then((res) => {
-      userInfo.setUserInfo(res) //после отправки данных на сервер, отрисовываем их на странице
-      popupProfile.setButtonText('Сохранить')
+    api
+      .editProfile(data)
+      .then((res) => {
+        userInfo.setUserInfo(res) //после отправки данных на сервер, отрисовываем их на странице
 
-      popupProfile.close()
-    })
+        popupProfile.close()
+      })
+      .catch(console.log)
+      .finally(() => {
+        popupProfile.setButtonText('Сохранить')
+      })
   },
 })
 const popupZoom = new PopupWithImage('.popup-zoom')
@@ -120,21 +142,30 @@ function createCardElement(card) {
     (id) => {
       popupConfirmDelete.open()
       popupConfirmDelete.submitHandler(() => {
-        api.deleteCard(id).then((res) => {
-          cardNew.deleteCard()
-          popupConfirmDelete.close()
-        })
+        api
+          .deleteCard(id)
+          .then((res) => {
+            cardNew.deleteCard()
+            popupConfirmDelete.close()
+          })
+          .catch(console.log)
       })
     },
     (id) => {
       if (cardNew.isLiked()) {
-        api.deleteLike(id).then((res) => {
-          cardNew.setLikes(res.likes)
-        })
+        api
+          .deleteLike(id)
+          .then((res) => {
+            cardNew.setLikes(res.likes)
+          })
+          .catch(console.log)
       } else {
-        api.setLike(id).then((res) => {
-          cardNew.setLikes(res.likes)
-        })
+        api
+          .setLike(id)
+          .then((res) => {
+            cardNew.setLikes(res.likes)
+          })
+          .catch(console.log)
       }
     },
     userId,
@@ -147,6 +178,7 @@ function createCardElement(card) {
 
 buttonOpenPopupNewCard.addEventListener('click', () => {
   //открытие попапа добавления карточки
+  popupNewCard.disableButton()
   popupNewCard.open()
 })
 
@@ -160,6 +192,7 @@ buttonOpenPopupProfile.addEventListener('click', () => {
 })
 
 profileAvatar.addEventListener('click', () => {
+  popupAvatar.disableButton()
   popupAvatar.open()
 })
 

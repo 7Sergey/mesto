@@ -11,17 +11,13 @@ export default class Api {
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    })
-      .then((res) => this._checkResponse(res))
-      .catch(console.log)
+    }).then((res) => this._checkResponse(res))
   }
 
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    })
-      .then((res) => this._checkResponse(res))
-      .catch(console.log)
+    }).then((res) => this._checkResponse(res))
   }
 
   editProfile({ name, about }) {
@@ -32,9 +28,7 @@ export default class Api {
         name: name,
         about: about,
       }),
-    })
-      .then((res) => this._checkResponse(res))
-      .catch(console.log)
+    }).then((res) => this._checkResponse(res))
   }
 
   addCard({ name, link }) {
@@ -45,36 +39,28 @@ export default class Api {
         name: name,
         link: link,
       }),
-    })
-      .then((res) => this._checkResponse(res))
-      .catch(console.log)
+    }).then((res) => this._checkResponse(res))
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       headers: this._headers,
       method: 'DELETE',
-    })
-      .then((res) => this._checkResponse(res))
-      .catch(console.log)
+    }).then((res) => this._checkResponse(res))
   }
 
   setLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       headers: this._headers,
       method: 'PUT',
-    })
-      .then((res) => this._checkResponse(res))
-      .catch(console.log)
+    }).then((res) => this._checkResponse(res))
   }
 
   deleteLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       headers: this._headers,
       method: 'DELETE',
-    })
-      .then((res) => this._checkResponse(res))
-      .catch(console.log)
+    }).then((res) => this._checkResponse(res))
   }
 
   editAvatar(avatar) {
@@ -84,9 +70,7 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatar,
       }),
-    })
-      .then((res) => this._checkResponse(res))
-      .catch(console.log)
+    }).then((res) => this._checkResponse(res))
   }
 }
 

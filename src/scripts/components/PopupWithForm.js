@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     this._form = this._popup.querySelector('.popup__form')
     this._handleFormSubmit = handleFormSubmit
     this._button = this._form.querySelector('.popup__button')
+    this._inputList = this._form.querySelectorAll('.popup__input')
   }
 
   disableButton() {
@@ -28,7 +29,6 @@ export default class PopupWithForm extends Popup {
     })
   }
   _getInputValues() {
-    this._inputList = this._form.querySelectorAll('.popup__input')
     const formValues = {}
     this._inputList.forEach((input) => {
       const name = input.name

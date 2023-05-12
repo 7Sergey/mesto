@@ -72,10 +72,8 @@ class Card {
 
   setLikes(newLikes) {
     this._likes = newLikes
-    const counterLikesElement = this._element.querySelector(
-      '.card__likes-counter'
-    )
-    counterLikesElement.textContent = this._likes.length
+
+    this._counterLikesElement.textContent = this._likes.length
 
     if (this.isLiked()) {
       this._setLikeIcon()
@@ -101,7 +99,9 @@ class Card {
     this._cardImage.src = this._image
     this._buttonDelete = this._element.querySelector('.card__trash-button') //кнопка удаления
     this._buttonLike = this._element.querySelector('.card__button') //лайки
-
+    this._counterLikesElement = this._element.querySelector(
+      '.card__likes-counter'
+    )
     // скрываем корзину, если карточка не пользователя
     if (!this._isOwner) {
       this._element.querySelector('.card__trash-button').style.display = 'none' //скрываем кнопку, если не карточка не владельца
